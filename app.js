@@ -44,18 +44,26 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// "mongodb://localhost/yelp_camp"
 mongoose
-  .connect(
-    "mongodb+srv://Brendan:Dinofish1.@learn-mern-dsjln.mongodb.net/yelp_camp?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(process.env.DATABASEURL, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connected to DB!"))
   .catch((error) => console.log(error.message));
+// mongoose
+//   .connect(
+//     "mongodb+srv://Brendan:Dinofish1.@learn-mern-dsjln.mongodb.net/yelp_camp?retryWrites=true&w=majority",
+//     {
+//       useNewUrlParser: true,
+//       useCreateIndex: true,
+//       useUnifiedTopology: true,
+//     }
+//   )
+//   .then(() => console.log("Connected to DB!"))
+//   .catch((error) => console.log(error.message));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 // Adds our CSS Stylesheet
